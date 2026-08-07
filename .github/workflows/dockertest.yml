@@ -13,7 +13,7 @@ jobs:
             second-action-react-jswebapp
 
       - name: Build Docker image
-        run: docker build -t second-action-react-jswebapp .
+        run: docker build -t second-action-react-jswebapp ./second-action-react-jswebapp
 
       - name: Run container
         run: docker run -d -p 8080:8080 --name test-container second-action-react-jswebapp
