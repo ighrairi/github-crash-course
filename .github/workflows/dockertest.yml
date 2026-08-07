@@ -4,6 +4,23 @@ on: push
 
 jobs:
   test:
+    runs-on: ubuntu-slim
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+        with:
+          sparse-checkout: |
+            second-action-react-jswebapp
+      - name: Install nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: '24.19.0'
+      - name: Install dependencies
+        run: npm ci --prefix second-action-react-jswebapp
+      - name: Run tests
+        run: npm test --prefix second-action-react-jswebapp
+  deploy:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -11,7 +28,7 @@ jobs:
         with:
           sparse-checkout: |
             second-action-react-jswebapp
-            
+
       - name: Install dependencies
         run: npm install
         working-directory: ./second-action-react-jswebapp
