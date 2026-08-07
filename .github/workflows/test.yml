@@ -15,5 +15,12 @@ jobs:
         with:
           sparse-checkout: |
             second-action-react-jswebapp
-
+      - name: Install nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: '24.19.0'
+      - name: Install dependencies
+        run: npm ci --prefix second-action-react-jswebapp
+      - name: Run tests
+        run: npm test --prefix second-action-react-jswebapp
       
