@@ -11,6 +11,15 @@ jobs:
         with:
           sparse-checkout: |
             second-action-react-jswebapp
+            
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./second-action-react-jswebapp
+
+      - name: Run security audit
+        run: npm audit --audit-level=high
+        working-directory: ./second-action-react-jswebapp
+        continue-on-error: true
 
       - name: Build Docker image
         run: docker build -t second-action-react-jswebapp ./second-action-react-jswebapp
